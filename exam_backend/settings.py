@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "corsheaders",
-    "teacher",
+    "students",
+    "teachers",
+    "exams",
+    "settings",
 ]
 
 MIDDLEWARE = [
@@ -50,10 +53,13 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "corsheaders.middleware.common.CommonMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_ALL_ORIGINS = True
+
 
 ROOT_URLCONF = "exam_backend.urls"
 
@@ -81,8 +87,12 @@ WSGI_APPLICATION = "exam_backend.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "examportaldb",
+        "USER": "dev",
+        "PASSWORD": "kien1029",
+        "HOST": "localhost",
+        "PORT": "",
     }
 }
 
