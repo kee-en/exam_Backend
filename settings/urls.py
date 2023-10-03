@@ -1,10 +1,11 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import GenderChoiceViewSet
+from .views import GenderChoiceViewSet, TokenCreateView
 
 router = DefaultRouter()
-router.register(r'gender-choices', GenderChoiceViewSet)
+router.register(r"gender-choices", GenderChoiceViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path("api/token/", TokenCreateView.as_view(), name="token-create"),
+    path("", include(router.urls)),
 ]
