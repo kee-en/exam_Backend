@@ -17,13 +17,13 @@ jobs:
 
     services:
       postgres:
-        image: postgres:13  # Use the PostgreSQL version you need
+        image: postgres:13
         ports:
           - 5432:5432
         env:
-          POSTGRES_USER: myuser  # Change as needed
-          POSTGRES_PASSWORD: mypassword  # Change as needed
-          POSTGRES_DB: mytestdb  # Change as needed
+          POSTGRES_USER: dev  # Match the database user with your Django settings
+          POSTGRES_PASSWORD: kien1029  # Match the database password with your Django settings
+          POSTGRES_DB: examportaldb  # Match the database name with your Django settings
 
     steps:
     - uses: actions/checkout@v3
