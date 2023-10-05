@@ -9,7 +9,7 @@ from .models import StudentProfile
 class StudentProfileAPITestCase(APITestCase):
     def setUp(self):
         self.user = User.objects.create_user(
-            username="testuser", password="testpassword"
+            username="kiend", password="kien1029"
         )
         self.student_profile = StudentProfile.objects.create(
             user=self.user,
