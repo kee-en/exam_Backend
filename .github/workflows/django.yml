@@ -39,6 +39,7 @@ jobs:
       run: |
         # Apply migrations to the test database
         python manage.py migrate --database=default
+        python manage.py loaddata initial_data.json
 
         # Load initial data if needed
         python manage.py loaddata initial_data.json  # Replace with your data file
