@@ -13,7 +13,7 @@ class StudentProfileViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_serializer(self, *args, **kwargs):
-        if self.action in ['update', 'partial_update']:
+        if self.action in ["update", "partial_update"]:
             return StudentProfileSerializer
         return StudentProfileSerializer
 
