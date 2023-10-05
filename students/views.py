@@ -1,4 +1,3 @@
-from django.contrib.auth.views import LoginView
 from django.shortcuts import render
 from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
@@ -30,5 +29,5 @@ class StudentProfileViewSet(viewsets.ModelViewSet):
         serializer = StudentProfileSerializer(instance, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
