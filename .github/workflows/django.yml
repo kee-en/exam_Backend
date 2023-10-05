@@ -15,6 +15,16 @@ jobs:
       matrix:
         python-version: [3.11]
 
+    services:
+      postgres:
+        image: postgres:13  # Use the PostgreSQL version you need
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: myuser  # Change as needed
+          POSTGRES_PASSWORD: mypassword  # Change as needed
+          POSTGRES_DB: mytestdb  # Change as needed
+
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
@@ -27,9 +37,6 @@ jobs:
         pip install -r requirements.txt
     - name: Set up Database
       run: |
-        # Create a test database using PostgreSQL (modify as needed for your database)
-        sudo -u postgres createdb mytestdb
-
         # Apply migrations to the test database
         python manage.py migrate --database=default
 
