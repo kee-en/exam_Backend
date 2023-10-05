@@ -8,42 +8,35 @@ on:
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
       matrix:
         python-version: [3.11]
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_DB: examportaldb
+          POSTGRES_USER: dev
+          POSTGRES_PASSWORD: kien1029
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
+    steps:
+    - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
-
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-
-    - name: Create and configure PostgreSQL database
-      run: |
-        sudo apt-get update
-        sudo apt-get -y install postgresql
-        sudo service postgresql start
-        sudo -u postgres psql -c "CREATE DATABASE examportaldb;"
-        sudo -u postgres psql -c "CREATE USER dev WITH PASSWORD 'kien1029';"
-        sudo -u postgres psql -c "ALTER ROLE dev SET client_encoding TO 'utf8';"
-        sudo -u postgres psql -c "ALTER ROLE dev SET default_transaction_isolation TO 'read committed';"
-        sudo -u postgres psql -c "ALTER ROLE dev SET timezone TO 'UTC';"
-        sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE examportaldb TO dev;"
-
-    - name: Run Database Migrations
+    - name: Run Migrations and Tests
       run: |
         python manage.py migrate
-
-    - name: Run Tests
-      run: |
         python manage.py test
