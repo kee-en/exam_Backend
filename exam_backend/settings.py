@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from datetime import timedelta
 from pathlib import Path
 
@@ -106,11 +107,11 @@ WSGI_APPLICATION = "exam_backend.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "examportaldb",
-        "USER": "root",
-        "PASSWORD": "kien1029",
-        "HOST": "localhost",
-        "PORT": "",
+        "NAME": os.getenv("POSTGRES_DB", "examportaldb"),
+        "USER": os.getenv("POSTGRES_USER", "dev"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD", "kien1029"),
+        "HOST": os.getenv("DB_HOST", "localhost"),
+        "PORT": os.getenv("DB_PORT", "5432"),
     }
 }
 

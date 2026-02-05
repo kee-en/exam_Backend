@@ -10,6 +10,12 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+      POSTGRES_DB: examportaldb
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: kien1029
+      DB_HOST: postgres
+      DB_PORT: 5432
     strategy:
       max-parallel: 4
       matrix:
