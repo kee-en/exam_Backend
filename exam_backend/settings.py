@@ -107,7 +107,7 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "examportaldb",
-        "USER": "dev",
+        "USER": "root",
         "PASSWORD": "kien1029",
         "HOST": "localhost",
         "PORT": "",
